@@ -5,8 +5,8 @@ var webpack = require('webpack');
 module.exports = {
   mode : 'development',
   entry : {
-    app: './src/main.js',
-    vendors: ['jquery']
+    app: './src/index.js',
+    vendors: ['vue', 'vuex', 'vue-router', 'axios', 'jquery']
   },
   output : {
     path : path.resolve(__dirname, 'dist'),
@@ -15,18 +15,19 @@ module.exports = {
   module : {
     rules : [
               {
+                test: /\.vue$/,
+                loader: 'vue-loader'
+              },
+              {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env']
-                    }
+                    loader: 'babel-loader?cacheDirectory=true'
                 }
               },
               {
                 test: /\.css$/,
-                use: ['style-loader', 'css-loader']
+                use: ['vue-style-loader', 'css-loader']
               },
               {
                 test: /\.(png|svg|jpe?g|gif)$/,
@@ -44,15 +45,20 @@ module.exports = {
               }
             ]
   },
-  devtool: 'source-map',
+  resolve: {
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js'
+    },
+    extensions: ['*', '.js', '.vue', '.json']
+  },
+  devtool: '#eval-source-map',
   devServer : {
-    colors : true,
-    historyApiFailback : true,
-    inline : true,
-    hot : true,
+    port : 8000,
     disableHostCheck: true,
+    historyApiFallback: true,
     noInfo: true,
     overlay: true,
+    inline: false
   },
   performance: {
     hints: false

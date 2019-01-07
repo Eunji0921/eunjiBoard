@@ -7,7 +7,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = {
   mode : 'production',
   entry : {
-    app: './src/main.js',
+    app: './src/index.js',
     vendors: ['jquery']
   },
   output : {
@@ -16,35 +16,32 @@ module.exports = {
   },
   module : {
     rules : [
-              {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env']
-                    }
-                }
-              },
-              {
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader']
-              },
-              {
-                test: /\.(png|svg|jpe?g|gif)$/,
-                loader: 'file-loader',
-                options: {
-                  name: '[name].[ext]?[hash]'
-                }
-              },
-              {
-                test: /\.(png|svg|jpe?g|gif)$/,
-                loader:'url-loader',
-                options: {
-                    limit: 10000
-                  }
-              }
-            ]
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+            loader: 'babel-loader?cacheDirectory=true'
+        }
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.(png|svg|jpe?g|gif)$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]?[hash]'
+        }
+      },
+      {
+        test: /\.(png|svg|jpe?g|gif)$/,
+        loader:'url-loader',
+        options: {
+            limit: 10000
+          }
+      }
+    ]
   },
   plugins: [
     new HtmlWebPackPlugin({
