@@ -6,13 +6,13 @@
 </template>
 
 <script>
-import BarChart from './components/BarChart'
-import LineChart from './components/LineChart'
+import BarChart from './components/BarChart.vue'
+import LineChart from './components/LineChart.vue'
 export default {
   name: 'App',
   components: {
-    BarChart,
-    LineChart
+    'bar-chart' : BarChart,
+    'line-chart' : LineChart
   },
   data () {
     return {

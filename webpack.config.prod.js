@@ -6,16 +6,12 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   mode : 'production',
-  entry : {
-    app: './src/index.js',
-    vendors: ['jquery']
-  },
-  output : {
-    path : path.resolve(__dirname, 'dist'),
-    filename: '[name].bundle.js'
-  },
   module : {
     rules : [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader'
+      },
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -25,7 +21,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: ['vue-style-loader', 'css-loader']
       },
       {
         test: /\.(png|svg|jpe?g|gif)$/,

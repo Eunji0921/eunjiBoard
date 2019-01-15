@@ -1,28 +1,31 @@
 var appname = 'eunjiboard';
 var path = require('path');
 var webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const { VueLoaderPlugin } = require('vue-loader')
+
+const HOST = 'localhost'
+const PORT = 8080
 
 module.exports = {
-  mode : 'development',
-  entry : {
-    app: './src/index.js',
-    vendors: ['vue', 'vuex', 'vue-router', 'axios', 'jquery']
-  },
-  output : {
-    path : path.resolve(__dirname, 'dist'),
-    filename: '[name].bundle.js'
-  },
+  mode: 'development',
   module : {
     rules : [
               {
                 test: /\.vue$/,
-                loader: 'vue-loader'
+                loader: 'vue-loader',
+                options: {
+                  loaders: {
+                    esModule: true,
+                    extractCSS: true
+                  }
+                }
               },
               {
                 test: /\.js$/,
-                exclude: /node_modules/,
                 use: {
-                    loader: 'babel-loader?cacheDirectory=true'
+                    loader: 'babel-loader'
                 }
               },
               {
@@ -43,24 +46,29 @@ module.exports = {
                     limit: 10000
                   }
               }
-            ]
+            ],
   },
-  resolve: {
-    alias: {
-      'vue$': 'vue/dist/vue.esm.js'
-    },
-    extensions: ['*', '.js', '.vue', '.json']
-  },
-  devtool: '#eval-source-map',
-  devServer : {
-    port : 8000,
-    disableHostCheck: true,
-    historyApiFallback: true,
-    noInfo: true,
-    overlay: true,
-    inline: false
-  },
-  performance: {
-    hints: false
+  plugins: [
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: 'index.html',
+      inject: true
+    }),
+    new VueLoaderPlugin()
+  ],
+  devServer: {
+    clientLogLevel: 'warning',
+    hot: true,
+    contentBase: 'dist',
+    compress: true,
+    host: HOST,
+    port: PORT,
+    open: true,
+    overlay: { warnings: false, errors: true },
+    publicPath: '/',
+    quiet: true,
+    watchOptions: {
+      poll: true
+    }
   },
 }

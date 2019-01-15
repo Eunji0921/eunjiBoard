@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import BaseChart from './BaseChart'
+import BaseChart from './BaseChart.vue'
 import * as d3 from 'd3'
 export default BaseChart.extend({
   name: 'line-chart',
