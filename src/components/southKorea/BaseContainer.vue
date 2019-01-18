@@ -1,5 +1,8 @@
 <template>
+  <section>
+  <div id="provName">행정구역을 선택해 보세요.</div>
   <div id="map"></div>
+  </section>
 </template>
 
 <script>
@@ -39,15 +42,13 @@ export default {
     },
     makeMap(exploder) {
 
-      console.log("version@@",  version, exploder, d3);
-
       var kor = area;
-      var width = 800;
-      var height = 600;
+      var width = 1500;
+      var height = 1000;
       var that = this;
       var projection = d3.geoMercator()
                                       .center([127.5, 35.9])
-                                      .scale(5000)
+                                      .scale(7000)
                                       .translate([width / 4, height / 2]);
 
       var path = d3.geoPath().projection(projection);
@@ -66,7 +67,7 @@ export default {
                                   .data(state_features)
                                   .enter().append("path")
                                   .attr('id', function (d) {
-                                    return "fips";
+                                    return "fips_" + d.properties.code;
                                   })
                                   .attr("fill", function (d) {
                                     return that.getColor(Math.random() * 1000);
@@ -79,18 +80,18 @@ export default {
                                       .data(state_features)
                                       .enter().append("path")
                                       .attr('id', function (d) {
-                                        return "fips";
+                                        return "fips_" + d.properties.code;
                                       })
                                       .attr("d", path);
 
       var exploder = exploder()
                               .projection(projection)
                               .size(function (d, i) {
-                                return 150;
+                                return 600;
                               })
                               .position(function (d, i) {
                                 document.getElementById("provName").innerHTML = d.properties.name + '('+d.properties.name_eng+')';
-                                return [650, height / 6];
+                                return [1100, height / 2.5];
                               })
 
         var highlighted_state = null;
@@ -101,7 +102,7 @@ export default {
                                               .duration(500)
                                               .attr("d", path)
                                               .attr("transform", "translate(0,0)")
-                                              .each('end', function () {
+                                              .on('end', function () {
                                                 d3.select(this).classed('highlighted-state', false);
                                               })
 
@@ -115,3 +116,31 @@ export default {
   }
 }
 </script>
+<style>
+
+#provinces path {
+    /*fill : #000;*/
+    stroke : #fff;
+}
+
+#explode-provinces path {
+    fill : rgba(0,0,0,0);
+    stroke : rgba(0,0,0,0);
+}
+
+#explode-provinces:hover {
+    cursor:pointer;
+}
+
+#explode-provinces path.highlighted-state {
+    fill: red;
+}
+#map {
+	width: 800px;
+	height: 600px;
+}
+#provName {
+	float: right;
+}
+
+</style>
