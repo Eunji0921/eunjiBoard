@@ -82,8 +82,8 @@ export default {
                                       .attr('id', function (d) {
                                         return "fips_" + d.properties.code;
                                       })
-                                      .attr("d", path);
-
+                                      .attr("d", path)
+                                      
       var exploder = exploder()
                               .projection(projection)
                               .size(function (d, i) {
@@ -142,5 +142,12 @@ export default {
 #provName {
 	float: right;
 }
+
+#provinces text {
+	cursor: pointer;
+	font-size: 12px;
+	font-family: 'Nanum Gothic';
+}
+
 
 </style>

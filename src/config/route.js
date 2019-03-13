@@ -7,6 +7,11 @@ const PageError = () =>
 const PageNotFound = () =>
   import( /* webpackChunkName: "PageNotFound" */ 'Component/error/404error.vue')
 
+//css3 샘플
+const sample_1 = () =>
+  import( /* webpackChunkName: "sampleCss" */ 'Component/css3Sample/responsive/sample_1.vue')
+
+
 import VueRouter from 'vue-router'
 
 const root = '/eunjiboard';
@@ -15,6 +20,11 @@ const routes = [
     name: 'error',
     path: root.concat('/error'),
     component: PageError
+  },
+  {
+    name: 'sample_1',
+    path: root.concat('/sample_1'),
+    component: sample_1
   }
 ].concat(d3Route)
 .concat({
