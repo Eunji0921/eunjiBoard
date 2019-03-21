@@ -1,7 +1,5 @@
 'use strict'
 
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
 // wepback 동적 loader 생성 
 exports.cssLoaders = function (options) {
   options = options || {};
@@ -20,6 +18,13 @@ exports.cssLoaders = function (options) {
     }
   };
 
+  const vueStyleLoader = {
+    loader: 'vue-style-loader',
+    options: {
+      attrs: { 'data-debug': 'less' }
+    }
+  };
+
   function generateLoaders (loader, loaderOptions) {
     const loaders = options.usePostCSS ? [cssLoader, postcssLoader] : [cssLoader];
 
@@ -32,15 +37,7 @@ exports.cssLoaders = function (options) {
       })
     }
 
-    if (options.extract) {
-      return ExtractTextPlugin.extract({
-        use: loaders,
-        fallback: 'vue-style-loader',
-      })
-    } else {
-        return ['vue-style-loader'].concat(loaders)
-    }
-    return ['vue-style-loader'].concat(loaders)
+    return [vueStyleLoader].concat(loaders)
 
   }
 

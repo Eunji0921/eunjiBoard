@@ -1,20 +1,22 @@
 'use strict'
+const path = require('path');
 
 const webpack = require('webpack');
-const merge = require('webpack-merge');
-const baseConfig = require('./webpack.config.base');
 const config = require('../config');
 const env = require('../config/dev.env');
 const utils = require('./utils');
-
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const devWebpackConfig = merge(baseConfig, {
+module.exports = {
+  output: {
+    publicPath: config.dev.publicPath,
+  },
   module: {
-    rules: utils.styleLoaders({sourceMap: true, usePostCSS: true})
+    rules: utils.styleLoaders({sourceMap: false, usePostCSS: false})
   },
   devServer: {
     contentBase: false,
+    hot: true,
     host: config.dev.host,
     port: config.dev.port,
     clientLogLevel: 'warning',
@@ -39,17 +41,13 @@ const devWebpackConfig = merge(baseConfig, {
             new webpack.DefinePlugin({
               'process.env': env
             }),
-            new webpack.HotModuleReplacementPlugin(),
             new webpack.NamedModulesPlugin(),
-            new webpack.NoEmitOnErrorsPlugin(),
+            new webpack.HotModuleReplacementPlugin(),
             new HtmlWebpackPlugin({
               filename: 'index.html',
               template: 'index.html',
               inject: true
-            }),
+            })
   ],
   devtool: config.dev.devtool
-})
-
-
-module.exports = devWebpackConfig;
+}

@@ -1,8 +1,8 @@
 <template>
-  <section>
-  <div id="provName">행정구역을 선택해 보세요.</div>
-  <div id="map"></div>
-  </section>
+  <div class="container">
+    <div id="provName">행정구역을 선택해 보세요.</div>
+    <div id="map"></div>
+  </div>
 </template>
 
 <script>
@@ -117,37 +117,35 @@ export default {
 }
 </script>
 <style>
+  #provinces path {
+      /*fill : #000;*/
+      stroke : #fff;
+  }
 
-#provinces path {
-    /*fill : #000;*/
-    stroke : #fff;
-}
+  #explode-provinces path {
+      fill : rgba(0,0,0,0);
+      stroke : rgba(0,0,0,0);
+  }
 
-#explode-provinces path {
-    fill : rgba(0,0,0,0);
-    stroke : rgba(0,0,0,0);
-}
+  #explode-provinces:hover {
+      cursor:pointer;
+  }
 
-#explode-provinces:hover {
-    cursor:pointer;
-}
+  #explode-provinces path.highlighted-state {
+      fill: red;
+  }
+  #map {
+    width: 800px;
+    height: 600px;
+  }
+  #provName {
+    float: right;
+  }
 
-#explode-provinces path.highlighted-state {
-    fill: red;
-}
-#map {
-	width: 800px;
-	height: 600px;
-}
-#provName {
-	float: right;
-}
-
-#provinces text {
-	cursor: pointer;
-	font-size: 12px;
-	font-family: 'Nanum Gothic';
-}
-
+  #provinces text {
+    cursor: pointer;
+    font-size: 12px;
+    font-family: 'Nanum Gothic';
+  }
 
 </style>

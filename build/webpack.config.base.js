@@ -1,20 +1,19 @@
 'use strict'
 
 const path = require('path');
-const webpack = require('webpack');
+const merge = require('webpack-merge');
 const config = require('../config');
 const vueLoaderConfig = require('./vue-loader.conf');
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
-module.exports = {
+var baseConfig = {
   context: path.resolve(__dirname, '../'),
   entry: {
-    app: './src/main.js',
+    app: ['@babel/polyfill','./src/main.js'],
   },
   output: {
     path: path.resolve(__dirname, `../${config.resultPath}`),
-    publicPath:  process.env.NODE_ENV === 'production'
-    ? config.build.publicPath
-    : config.dev.publicPath,
+    publicPath: '',
     filename: '[name].js'
   },
   module: {
@@ -38,6 +37,39 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new VueLoaderPlugin()
+  ],
+  optimization: {
+    minimize: true,
+    namedModules: true,
+    noEmitOnErrors: true,
+    concatenateModules: true,
+    mangleWasmImports: true,
+    removeAvailableModules : true,
+    removeEmptyChunks : true,
+    mergeDuplicateChunks : true,
+    runtimeChunk: {
+      name: "manifest",
+    },
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+          vue: {
+            test: module => (/node_modules\/vue/.test(module.context) || /vue/.test(module.context)),
+            name: 'vue'
+          },
+          d3: {
+            test: module => (/node_modules\/d3/.test(module.context) || /d3/.test(module.context)),
+            name: 'd3'
+          },
+          vendor: {
+            test: module => (/node_modules\/(!vue)|(!d3)/.test(module.context) || /(!vue)|(!d3)/.test(module.context)),
+            name: 'vender'
+        },
+      },
+    }
+  },
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
@@ -52,4 +84,22 @@ module.exports = {
   performance: {
     hints: false
   }
+}
+
+module.exports = (env, argv) => {
+  var target = {};
+  baseConfig.mode = argv.mode;
+  /* 개발 모드 */
+  if (argv.mode === 'development') {
+    target = require('./webpack.config.dev');
+  /* 배포 모드 */
+  }else if(argv.mode === 'production'){
+    target = require('./webpack.config.prod');
+    /* 빌드 파일 분석 툴 활성화 여부 */
+    if (config.build.bundleAnalyzerReport) {
+      const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+      baseConfig.plugins.push(new BundleAnalyzerPlugin())
+    }
+  }
+  return merge(baseConfig, target);
 };
