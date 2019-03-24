@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div id="container">
     <div id="provName">행정구역을 선택해 보세요.</div>
     <div id="map"></div>
   </div>
@@ -43,12 +43,12 @@ export default {
     makeMap(exploder) {
 
       var kor = area;
-      var width = 1500;
+      var width = 1024;
       var height = 1000;
       var that = this;
       var projection = d3.geoMercator()
                                       .center([127.5, 35.9])
-                                      .scale(7000)
+                                      .scale(5000)
                                       .translate([width / 4, height / 2]);
 
       var path = d3.geoPath().projection(projection);
@@ -87,11 +87,11 @@ export default {
       var exploder = exploder()
                               .projection(projection)
                               .size(function (d, i) {
-                                return 600;
+                                return 300;
                               })
                               .position(function (d, i) {
                                 document.getElementById("provName").innerHTML = d.properties.name + '('+d.properties.name_eng+')';
-                                return [1100, height / 2.5];
+                                return [800, 200];
                               })
 
         var highlighted_state = null;
@@ -117,8 +117,15 @@ export default {
 }
 </script>
 <style>
+  @import '~Styles/common.css';
+  #container{
+    background-color: burlywood;
+    width: 100%;
+    max-width: 1024px;
+    margin : auto;
+  }
+
   #provinces path {
-      /*fill : #000;*/
       stroke : #fff;
   }
 
@@ -135,8 +142,8 @@ export default {
       fill: red;
   }
   #map {
-    width: 800px;
-    height: 600px;
+    width: 100%;
+    height: 100%;
   }
   #provName {
     float: right;
