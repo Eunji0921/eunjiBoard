@@ -1,4 +1,6 @@
-//검색메인
+//메인
+import MainRoute from './route/main'
+// d3
 import d3Route from './route/d3'
 
 //에러페이지
@@ -9,7 +11,7 @@ const PageNotFound = () =>
 
 //css3 샘플
 const sample_1 = () =>
-  import( /* webpackChunkName: "sampleCss" */ 'Component/css3Sample/responsive/sample_1.vue')
+  import( /* webpackChunkName: "sampleCss" */ 'Component/contents/css3Sample/responsive/sample_1.vue')
 
 
 import VueRouter from 'vue-router'
@@ -26,7 +28,9 @@ const routes = [
     path: root.concat('/sample_1'),
     component: sample_1
   }
-].concat(d3Route)
+]
+.concat(MainRoute)
+.concat(d3Route)
 .concat({
   name: '404',
   path: root.concat('*'),

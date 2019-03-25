@@ -121,7 +121,7 @@ export default {
   #container{
     background-color: burlywood;
     width: 100%;
-    max-width: 1024px;
+    max-width: 1400px;
     margin : auto;
   }
 

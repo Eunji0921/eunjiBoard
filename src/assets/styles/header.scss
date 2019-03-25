@@ -1,0 +1,32 @@
+/* 메뉴 배경 컬러 */
+$menu-color : #333;
+/* 메뉴 폰트 컬러 */
+$menu-fontColor : white;
+/* 메뉴 hover 컬러 */
+$menu-hover :  #111;
+/* 메뉴 active 컬러 */
+$menu-active : #4CAF50;
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: $menu-color;
+  li {
+    float: left;
+    a {
+      display: block;
+      color: $menu-fontColor;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      &:hover {
+        background-color: $menu-hover;
+      }
+    }
+    &.active {
+      background-color: $menu-active;
+    }
+  }
+}
