@@ -23,7 +23,6 @@ export default {
   props: [],
   data(){
     return{
-      activeMenu : 'index',
       menuList : [
         {key : 'index', title : '인덱스'},
         {key : 'geoDashBoard', title : '맵 대시보드'}
@@ -37,12 +36,6 @@ export default {
   watch: {
   },
   methods: {
-    setActiveMenu(menuKey){
-      if(this.activeMenu !== menuKey){
-        this.activeMenu = menuKey;
-        this.$emit('activeMenu', menuKey);
-      }
-    }
   }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="mainContainer">
-    <main-header v-on:activeMenu="activeContents"></main-header>
+    <main-header></main-header>
     <keep-alive>
       <router-view></router-view>
     </keep-alive>
@@ -29,10 +29,6 @@ export default {
   watch: {
   },
   methods: {
-    activeContents(menuKey){
-      console.log("activeContents@@@", menuKey);
-      this.activeView = menuKey;
-    }
   }
 }
 </script>
