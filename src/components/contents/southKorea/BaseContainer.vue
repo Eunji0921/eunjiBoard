@@ -43,7 +43,7 @@ export default {
     makeMap(exploder) {
 
       var kor = area;
-      var width = 1024;
+      var width = 1800;
       var height = 1000;
       var that = this;
       var projection = d3.geoMercator()

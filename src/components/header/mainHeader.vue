@@ -1,12 +1,13 @@
 <template>
   <ul>
     <template v-for="(menu, index) in menuList">
-      <li class="menu" 
-          :class="[activeMenu == menu.key ? 'active' : '']" 
+      <router-link class="menu" 
+          active-class="active"
+          tag="li"
           :key="index"
-          @click="setActiveMenu(menu.key)">
+          :to="'/main/' + menu.key">
         <a href="javascript:;">{{menu.title}}</a>
-      </li>
+      </router-link>
     </template>
   </ul>
 </template>

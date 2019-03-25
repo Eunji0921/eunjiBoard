@@ -1,6 +1,9 @@
 <template>
   <div class="mainContainer">
     <main-header v-on:activeMenu="activeContents"></main-header>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 
@@ -16,7 +19,7 @@ export default {
   props: [],
   data(){
     return{
-    
+      activeView : ''
     }
   },
   mounted () {
@@ -28,6 +31,7 @@ export default {
   methods: {
     activeContents(menuKey){
       console.log("activeContents@@@", menuKey);
+      this.activeView = menuKey;
     }
   }
 }

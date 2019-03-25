@@ -4,8 +4,8 @@ const BaseContainer = () =>
 const root = '/eunjiboard';
 const d3Route = [
   {
-    name: 'geo',
-    path: root.concat('/geo'),
+    name: 'geoDashBoard',
+    path: root.concat('/geoDashBoard'),
     component: BaseContainer
   }
 ]
