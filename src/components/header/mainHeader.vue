@@ -1,14 +1,16 @@
 <template>
-  <div class="header">
-    <template v-for="(menu, index) in menuList">
-      <router-link class="menu" 
-          active-class="active"
-          tag="div"
-          :key="index"
-          :to="'/main/' + menu.key">
-        <a href="javascript:;">{{menu.title}}</a>
-      </router-link>
-    </template>
+  <div class="headerConteinr">
+    <div class="header">
+      <template v-for="(menu, index) in menuList">
+        <router-link class="menu" 
+            active-class="active"
+            tag="div"
+            :key="index"
+            :to="'/main/' + menu.key">
+          <a href="javascript:;">{{menu.title}}</a>
+        </router-link>
+      </template>
+    </div>
   </div>
 </template>
 
