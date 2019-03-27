@@ -1,23 +1,29 @@
 <template>
-  
+  <div class="content">
+    <gaugeComponent :value="value"></gaugeComponent>
+  </div>
 </template>
 
 <script>
 import Vue from 'vue'
+import gaugeComponent from './component/gaugeComponent.vue'
 
 export default {
   name : 'baseContainer',
   components : {
-
+    gaugeComponent
   },
   props: [],
   data(){
     return{
+      value : 0
     }
   },
-  mounted () {
-    this.$nextTick(()=>{
-    })
+  mounted() {
+    setInterval(() => {
+      this.value = Math.floor(Math.random() * (100 - 0 + 1)); 
+      console.log("this.value@@", this.value);
+    }, 5000);
   },
   watch: {
   },
@@ -25,6 +31,7 @@ export default {
   }
 }
 </script>
-<style>
-  @import '~Styles/common.css';
+
+<style lang="scss">
+  @import '~Styles/base.scss';
 </style>
