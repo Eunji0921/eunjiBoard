@@ -1,17 +1,21 @@
 <template>
-  <div class="headerConteinr">
-    <div class="header">
-      <template v-for="(menu, index) in menuList">
-        <router-link class="menu" 
-            active-class="active"
-            tag="div"
-            :key="index"
-            :to="'/main/' + menu.key">
-          <a href="javascript:;">{{menu.title}}</a>
-        </router-link>
-      </template>
+  <div class="headerContainer">
+    <template v-for="(menu, index) in menuList">
+      <input :id="menu.title" name="radio" type="radio" :key="'menu_radio_' + index">
+      <label :for='menu.title' :key="'menu' + index">
+        <span>{{menu.title}}</span>
+        <div class="lil_arrow"></div>
+        <div class="bar"></div>
+        <div v-if="menu.subMenu.length" class="headerContainer__content">
+          <ul>
+            <template v-for="(subMenu, subIndex) in menu.subMenu">
+              <li :key="'subMenu_' + subIndex">{{subMenu}}</li>
+            </template>
+          </ul>
+        </div>
+      </label>
+    </template>
     </div>
-  </div>
 </template>
 
 <script>
@@ -26,8 +30,8 @@ export default {
   data(){
     return{
       menuList : [
-        {key : 'index', title : '인덱스'},
-        {key : 'geoDashBoard', title : '맵 대시보드'}
+        {key : 'index', title : 'Index', subMenu: []},
+        {key : 'DashBoard', title : 'DashBoard', subMenu: ['Map', 'Map2', 'Map3', 'Map4']}
       ]
     }
   },

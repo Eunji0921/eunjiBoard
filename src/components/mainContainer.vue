@@ -33,5 +33,6 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+  @import '~Styles/base.scss';
 </style>

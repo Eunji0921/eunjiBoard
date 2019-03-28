@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="contentContainer">
     <gaugeComponent :value="value"></gaugeComponent>
   </div>
 </template>
@@ -31,7 +31,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-  @import '~Styles/base.scss';
-</style>
