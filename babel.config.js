@@ -3,7 +3,7 @@ module.exports = function (api) {
 
   const presets = [
     [
-      "@babel/env"
+      "@babel/env", {modules: false}
     ]
   ];
   const plugins = ["lodash", "@babel/plugin-syntax-dynamic-import"];

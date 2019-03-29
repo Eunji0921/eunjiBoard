@@ -1,13 +1,13 @@
 
-$default-font:'Roboto', sans-serif; // Roboto Google font
-$global-font-size:12px; // Global font sizing
-$global-font-weight:500; // Global font weight
-$global-font-smoothing:antialiased; // Global smoothing method
-$content-width:700px; // Width of wrapper
-$background:linear-gradient(135deg, #8254EA 0%, #E86DEC 100%); // Body background
-$full-height: 100vh; // Height of body
+$default-font:'Roboto', sans-serif;
+$global-font-size:12px;
+$global-font-weight:500;
+$global-font-smoothing:antialiased;
+$content-width:700px;
+$background:linear-gradient(135deg, #8254EA 0%, #E86DEC 100%);
+$full-height: 100vh;
 
-$title-width:400px; // Width of title block
+$title-width:400px;
 
 ul{padding:0;margin:0;}li{list-style-type:none;}input[type='radio']{display:none;}label{cursor:pointer}::-webkit-scrollbar {display: none; }
 
@@ -17,6 +17,11 @@ ul{padding:0;margin:0;}li{list-style-type:none;}input[type='radio']{display:none
     bottom:0;
     left:0;
     right:0;
+}
+
+
+@mixin label-active{
+  
 }
 
 .mainContainer {
@@ -157,29 +162,4 @@ input[type='radio']:checked + label{
   to{left:0;opacity:1}
 }
 
-// My Styles
-
-.love{
-  position: absolute;
-  right: 20px;
-  bottom: 0px;
-  font-size: 11px;
-  font-weight: normal;
-  p{
-    color:white;
-    font-weight:normal;
-    font-family: 'Open Sans', sans-serif;
-  }
-  a{
-    color:white;
-    font-weight:700;
-    text-decoration:none;
-  }
-  img{
-    position:relative;
-    top:3px;
-    margin:0px 4px;
-    width:10px;
-  }
-}
 }

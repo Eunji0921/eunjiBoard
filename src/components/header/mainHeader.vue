@@ -2,7 +2,7 @@
   <div class="headerContainer">
     <template v-for="(menu, index) in menuList">
       <input :id="menu.title" name="radio" type="radio" :key="'menu_radio_' + index">
-      <label :for='menu.title' :key="'menu' + index">
+      <label :style="{'height': 69 + (menu.subMenu.length * 64) +'px'}" :for='menu.title' :key="'menu' + index">
         <span>{{menu.title}}</span>
         <div class="lil_arrow"></div>
         <div class="bar"></div>
