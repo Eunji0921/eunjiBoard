@@ -19,15 +19,32 @@ ul{padding:0;margin:0;}li{list-style-type:none;}input[type='radio']{display:none
     right:0;
 }
 
+// 라벨 기본 스타일
+@mixin label-default{
+  background: #212e41;
+  text-indent:4px;
+  transition-property:height;
+  transition-duration:.6s; -webkit-transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
 
-@mixin label-active{
-  
+// 서브메뉴 스타일
+@mixin label-active($length){
+  @for $i from 1 through $length{
+    li:nth-of-type(#{$i}){
+      animation:in .15s .45s + $i/8 forwards;
+      -webkit-transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      -moz-animation:in .15s .45s + $i/8 forwards;
+      -moz-transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+  } 
 }
 
 .mainContainer {
+  display: flex;
+  height : 1080px;
   .headerContainer{
-    height : 1000px;
-    width: 225px;
+    min-width: 225px;
+    height: 100%;
     overflow: hidden;
     background: #2a394f;
     font-weight: bold;
@@ -97,8 +114,14 @@ ul{padding:0;margin:0;}li{list-style-type:none;}input[type='radio']{display:none
         padding:25px 0px;
         text-indent:25px;
         box-shadow: 0px 0px #126CA1  inset;
-          transition:box-shadow .3s,text-indent .3s;
+        transition:box-shadow .3s,text-indent .3s;
         position:relative;
+        cursor: pointer;
+
+        &.active{
+          background: #126CA1;
+        }
+
         &:hover{
           background:#0c93e4;
           box-shadow: 3px 0px #126CA1  inset;
@@ -113,8 +136,10 @@ ul{padding:0;margin:0;}li{list-style-type:none;}input[type='radio']{display:none
     }
   }
   .contentContainer{
+    flex : 1;
     width: 100%;
-    max-width: 980px;
+    height: 100%;
+    min-width: 80px;
     margin: auto;
   }
 
@@ -133,30 +158,21 @@ input[type="radio"]:checked + label > .lil_arrow {
   border-top: 2px solid rgb(20, 163, 249);
   border-right: 2px solid rgb(20, 163, 249);
 }
-input[type='radio']:checked + label{
-  height: 325px;
-  background: #212e41;
-  text-indent:4px;
-  transition-property:height;
-  transition-duration:.6s; -webkit-transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
+
 input[type='radio']:checked + label .bar{
   width:0;
 }
 
-input[type='radio']:checked + label{
-  @for $i from 1 through 4{
-    li:nth-of-type(#{$i}){
-      animation:in .15s .45s + $i/8 forwards;
-      -webkit-transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-      -moz-animation:in .15s .45s + $i/8 forwards;
-      -moz-transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    }
-  } 
+input[type='radio'][id='dashBoard']:checked + label{
+  height: 261px;
+  @include label-default;
 }
 
-// Animations
+input[type='radio'][id='dashBoard']:checked + label{
+  @include label-active(4);
+}
 
+// 애니메이션
 @keyframes in{
   from{left:-100%;opacity:0}
   to{left:0;opacity:1}

@@ -2,17 +2,50 @@
   <div class="headerContainer">
     <template v-for="(menu, index) in menuList">
       <input :id="menu.title" name="radio" type="radio" :key="'menu_radio_' + index">
-      <label :style="{'height': 69 + (menu.subMenu.length * 64) +'px'}" :for='menu.title' :key="'menu' + index">
-        <span>{{menu.title}}</span>
-        <div class="lil_arrow"></div>
-        <div class="bar"></div>
-        <div v-if="menu.subMenu.length" class="headerContainer__content">
-          <ul>
-            <template v-for="(subMenu, subIndex) in menu.subMenu">
-              <li :key="'subMenu_' + subIndex">{{subMenu}}</li>
-            </template>
-          </ul>
-        </div>
+      <router-link
+        v-if="menu.type == 'master'"
+        class="menu" 
+        active-class="active"
+        tag="label"
+        :key="index"
+        :to="menu.url">
+          <span>{{menu.title}}</span>
+          <div class="lil_arrow"></div>
+          <div class="bar"></div>
+          <div class="headerContainer__content">
+            <ul>
+              <template v-for="(subMenu, subIndex) in menu.subMenu">
+                <router-link class="menu" 
+                  active-class="active"
+                  tag="li"
+                  :key="'subMenu_' + subIndex"
+                  :to="menu.url">
+                  {{subMenu.title}}
+                </router-link>
+              </template>
+            </ul>
+          </div>
+      </router-link>
+      <label 
+        v-if="menu.type == 'sub'"
+        :for='menu.title'
+        :key="'menu' + index">
+          <span>{{menu.title}}</span>
+          <div class="lil_arrow"></div>
+          <div class="bar"></div>
+          <div v-if="menu.type == 'sub'" class="headerContainer__content">
+            <ul>
+              <template v-for="(subMenu, subIndex) in menu.subMenu">
+                <router-link class="menu" 
+                  active-class="active"
+                  tag="li"
+                  :key="'subMenu_' + subIndex"
+                  :to="subMenu.url">
+                  {{subMenu.title}}
+                </router-link>
+              </template>
+            </ul>
+          </div>
       </label>
     </template>
     </div>
@@ -29,9 +62,23 @@ export default {
   props: [],
   data(){
     return{
-      menuList : [
-        {key : 'index', title : 'Index', subMenu: []},
-        {key : 'DashBoard', title : 'DashBoard', subMenu: ['Map', 'Map2', 'Map3', 'Map4']}
+      menuList : [{
+                    title : 'index',
+                    type:'master',
+                    url:'/main/index',
+                    subMenu: []
+                  },
+                  {
+                    title : 'dashBoard',
+                    type:'sub',
+                    url:'',
+                    subMenu: [
+                              {title : 'Map_1', url: '/main/geoDashBoard'},
+                              {title : 'Map_2', url: '/main/geoDashBoard'},
+                              {title : 'Map_3', url: '/main/geoDashBoard'},
+                              {title : 'Map_4', url: '/main/geoDashBoard'}
+                            ]
+                  }
       ]
     }
   },
