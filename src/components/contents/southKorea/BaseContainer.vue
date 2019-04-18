@@ -22,14 +22,17 @@ export default {
     }
   },
   mounted () {
-    this.$nextTick(()=>{
-      this.makeMap(exploder);
-    })
+    this.createInitMap();
   },
   watch: {
   },
   props: [],
   methods: {
+    createInitMap(){
+      this.$nextTick(()=>{
+        this.makeMap(exploder);
+      });    
+    },
     getColor(d) {
       return d > 1000 ? '#800026' :
       d > 500 ? '#BD0026' :
@@ -121,7 +124,7 @@ export default {
   #container{
     background-color: burlywood;
     width: 100%;
-    max-width: 1400px;
+    max-width: 1600px;
     margin : auto;
   }
 

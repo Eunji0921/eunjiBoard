@@ -11,7 +11,7 @@ module.exports = {
         publicPath : '/',                                   // 빌드 파일 publicPath 경로
         host:'127.0.0.1',                                   // 로컬
         target_host : '127.0.0.1',                          // spring ntour
-        port: 8888,                                         // port
+        port: 9999,                                         // port
         openBrowser: true,                                  // express 웹 서버 옵션 - 브라우저 오픈 여부
         errorOverlay: true,                                 // express 웹 서버 옵션 - 에러 노출 여부
         devtool: '#source-map',                             // source-map 설정

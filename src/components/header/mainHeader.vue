@@ -73,10 +73,10 @@ export default {
                     type:'sub',
                     url:'',
                     subMenu: [
-                              {title : 'Map_1', url: '/main/geoDashBoard'},
-                              {title : 'Map_2', url: '/main/geoDashBoard'},
-                              {title : 'Map_3', url: '/main/geoDashBoard'},
-                              {title : 'Map_4', url: '/main/geoDashBoard'}
+                              {title : 'Map', url: '/main/geoDashBoard'},
+                              {title : 'Test_2', url: '#'},
+                              {title : 'Test_3', url: '#'},
+                              {title : 'Test_4', url: '#'}
                             ]
                   }
       ]

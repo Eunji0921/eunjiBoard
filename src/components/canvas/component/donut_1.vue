@@ -8,11 +8,11 @@ export default {
     },
     width : {
       type : Number,
-      default : 50
+      default : 150
     },
     height : {
       type : Number,
-      default : 50
+      default : 150
     },
     styles: Object
   },
@@ -22,19 +22,23 @@ export default {
       newVal : 0
     }
   },
-  created(){
-    this.dataRender();
+  mounted(){
+    this.$nextTick(()=>{
+      this.dataRender();
+    })
   },
   watch : {
     value(newVal, oldVal){
       this.oldVal = this.value;
       this.newVal = newVal;
-      this.dataRender();
+      this.$nextTick(()=>{
+        this.dataRender();
+      })
     }
   },
   methods : {
     dataRender(){
-    if (!this.provider.context) return;
+      if (!this.provider.context) return;
 
       // 캔버스 컨트롤러 초기화
       this.provider.frame = [];

@@ -1,23 +1,22 @@
 <template>
   <CanvasWrapper :style="{width: width + 'px', height: height  + 'px'}">
-    <Donut :value="value"
+    <Gauge :value="value"
           :width="width"
           :height="height"
-          :styles="styles"></Donut>
+          :styles="styles"></Gauge>
   </CanvasWrapper>
 </template>
-
 
 <script>
 import Vue from 'vue'
 import CanvasWrapper from 'Component/canvas/canvasWrapper.vue';
-import Donut from 'Component/canvas/component/donut_1.vue';
+import Gauge from 'Component/canvas/component/gauge_1.vue';
 
 export default {
   name : 'gaugeComponent',
   components: {
     CanvasWrapper,
-    Donut
+    Gauge
   },
   props: {
     value : {
@@ -28,7 +27,7 @@ export default {
   data(){
     return{
       width : 150,
-      height : 150,
+      height : 300,
       styles : {
         backgorundColor : 'rgba(255,255,255,0)',
         color : 'rgba(34,150,182,1)',
