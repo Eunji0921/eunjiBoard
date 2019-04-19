@@ -33,7 +33,7 @@ export default {
     },
     direction : {
       type : String,
-      default : "top"
+      default : "right"
     }
   },
   data () {
@@ -64,9 +64,8 @@ export default {
       var radius = 0;
 
       // 캔버스 컨트롤러 초기화
-      this.provider.frame = [];
       this.provider.resize(this.width, this.height);
-      this.provider.options.refresh = true;
+      
       var deco = this.provider.context.canvas.height/ this.row * 2;
       var unit_width = this.provider.context.canvas.width / this.column - (margin * 2);
       var unit_height = (this.provider.context.canvas.height - deco) / this.row - (margin * 2);
@@ -81,8 +80,9 @@ export default {
           x: margin,
           y: this.height - deco + this.margin,
           width: this.width - (margin*2), 
-          height: deco/2 - margin,
-          fill: this.gaugeColor,radius:{ lt : radius, lb : radius, rt : radius, rb : radius },
+          height: (deco/2) - margin,
+          fill: this.gaugeColor,
+          radius:{ lt : radius, lb : radius, rt : radius, rb : radius },
           children:[
               {
                   shape:'path',
@@ -91,8 +91,10 @@ export default {
                   fill:this.gridColor,
                   x:0,
                   y:this.height - (deco/2),
-                  points:[{type:'line',x:this.width/2,y:this.height},
-                  {type:'line',x:this.width,y:this.height - (deco/2)}]
+                  points:[
+                    {type:'line', x:this.width/2, y:this.height},
+                    {type:'line', x:this.width, y:this.height - (deco/2)}
+                  ]
               }
           ],
           frame:false
@@ -119,7 +121,7 @@ export default {
           
           this.provider.frame.push({
               shape: 'rectangle',
-              x: unit_width * j + (this.margin * j * 2) + this.margin,
+              x: unit_width * j + (margin * j * 2) + margin,
               y: unit_height * i + (margin * i * 2) + margin,
               width: unit_width,
               height: unit_height,
@@ -139,7 +141,8 @@ export default {
                   y: (this.direction === "top" ? unit_height * i + unit_height * (1 - percent) : unit_height * i) + (margin * i * 2) + margin,
                   width: (this.direction === "left" || this.direction === "right" ? unit_width * percent : unit_width),
                   height: (this.direction === "top" || this.direction === "bottom" ? unit_height * percent : unit_height),
-                  fill: this.gaugeColor,radius:{ lt : radius, lb : radius, rt : radius, rb : radius },
+                  fill: this.gaugeColor,
+                  radius:{ lt : radius, lb : radius, rt : radius, rb : radius },
                   frame:true
               })
           }
@@ -194,6 +197,9 @@ export default {
     this.provider.draw();
     this.provider.animate(function(){
     });
+  },
+  destroyed(){
+    this.provider.dispose();
   }
 }
 </script>

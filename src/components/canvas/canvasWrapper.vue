@@ -23,7 +23,8 @@ export default {
         },
         draw : this.draw,
         animate : this.animate,
-        resize : this.resize
+        resize : this.resize,
+        dispose :  this.dispose
       },
       req_back : null
     }
@@ -90,8 +91,6 @@ export default {
     },
       drawShape(type, config) {
         var self = this;
-        // var back_ctx = this.provider.backContext;
-        // var data_ctx = this.provider.context;
         var ctx = type == 'back' ? this.provider.backContext : this.provider.context;
         ctx.save();
         if(config.composite) ctx.globalCompositeOperation = config.composite;

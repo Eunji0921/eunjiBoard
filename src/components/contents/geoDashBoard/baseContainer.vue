@@ -1,32 +1,35 @@
 <template>
   <div class="contentContainer">
-    <gauge-1 :value="value"></gauge-1>
-    <gauge-2 :value="value"></gauge-2>
+    <gaugeCanvas-1 :value="value"></gaugeCanvas-1>
+    <gaugeCanvas-2 :value="value"></gaugeCanvas-2>
+    <gaugeNormal-1 :value="value"></gaugeNormal-1>
   </div>
 </template>
 
 <script>
 import Vue from 'vue'
-import gaugeComponent from './component/gaugeComponent.vue'
-import gaugeComponent_2 from './component/gaugeComponent_2.vue'
+import gaugeCanvas_1 from './component/gaugeCanvas_1.vue'
+import gaugeCanvas_2 from './component/gaugeCanvas_2.vue'
+import gaugeNormal_1 from './component/gaugeNomal_1.vue'
 
 export default {
   name : 'baseContainer',
   components : {
-    'gauge-1' : gaugeComponent,
-    'gauge-2' : gaugeComponent_2
+    'gaugeCanvas-1' : gaugeCanvas_1,
+    'gaugeCanvas-2' : gaugeCanvas_2,
+    'gaugeNormal-1' : gaugeNormal_1
   },
   props: [],
   data(){
     return{
-      value : 50
+      value : 90
     }
   },
   mounted() {
-    setInterval(() => {
-      this.value = Math.floor(Math.random() * (100 - 0 + 1)); 
-      console.log("this.value@@", this.value);
-    }, 5000);
+    // setInterval(() => {
+    //   this.value = Math.floor(Math.random() * (100 - 0 + 1)); 
+    //   console.log("this.value@@", this.value);
+    // }, 5000);
   },
   watch: {
   },

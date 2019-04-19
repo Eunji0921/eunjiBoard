@@ -97,6 +97,9 @@ export default {
     this.provider.draw();
     this.provider.animate(function(){
     });
+  },
+  destroyed(){
+    this.provider.dispose();
   }
 }
 </script>

@@ -1,20 +1,14 @@
 <template>
-  <CanvasWrapper :style="{width: width + 'px', height: height  + 'px'}">
-    <Donut :value="value"
-          :width="width"
-          :height="height"
-          :styles="styles"></Donut>
-  </CanvasWrapper>
+  
 </template>
 
 
 <script>
-import Vue from 'vue'
-import CanvasWrapper from 'Component/canvas/canvasWrapper.vue';
-import Donut from 'Component/canvas/component/donut_1.vue';
+import Vue from 'vue';
+import $ from 'jquery';
 
 export default {
-  name : 'gaugeComponent',
+  name : 'gaugeSvgComponent_1',
   components: {
     CanvasWrapper,
     Donut
@@ -35,6 +29,14 @@ export default {
         textColor : 'rgba(200,200,200,1)',
         borderRadius : 0
       }
+    }
+  },
+  mounted(){
+
+  },
+  methods : {
+    procDrawImage(){
+      
     }
   }
 }
