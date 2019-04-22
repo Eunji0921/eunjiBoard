@@ -1,5 +1,6 @@
 <template>
   <div class="contentContainer">
+    <southKorea-geo></southKorea-geo>
     <gaugeCanvas-1 :value="value"></gaugeCanvas-1>
     <gaugeCanvas-2 :value="value"></gaugeCanvas-2>
     <gaugeNormal-1 :value="value"></gaugeNormal-1>
@@ -8,6 +9,7 @@
 
 <script>
 import Vue from 'vue'
+import southKoreaGeo from './component/southKoreaGeo.vue'
 import gaugeCanvas_1 from './component/gaugeCanvas_1.vue'
 import gaugeCanvas_2 from './component/gaugeCanvas_2.vue'
 import gaugeNormal_1 from './component/gaugeNomal_1.vue'
@@ -15,6 +17,7 @@ import gaugeNormal_1 from './component/gaugeNomal_1.vue'
 export default {
   name : 'baseContainer',
   components : {
+    'southKorea-geo' : southKoreaGeo,
     'gaugeCanvas-1' : gaugeCanvas_1,
     'gaugeCanvas-2' : gaugeCanvas_2,
     'gaugeNormal-1' : gaugeNormal_1

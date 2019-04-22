@@ -1,6 +1,5 @@
 <template>
-  <div id="container">
-    <div id="provName">행정구역을 선택해 보세요.</div>
+  <div class="mapWrap">
     <div id="map"></div>
   </div>
 </template>
@@ -34,31 +33,31 @@ export default {
       });    
     },
     getColor(d) {
-      return d > 1000 ? '#800026' :
-      d > 500 ? '#BD0026' :
-      d > 200 ? '#E31A1C' :
-      d > 100 ? '#FC4E2A' :
-      d > 50 ? '#FD8D3C' :
-      d > 20 ? '#FEB24C' :
-      d > 10 ? '#FED976' :
-      '#FFEDA0';
+      return d > 1000 ? '#1A237E' :
+      d > 500 ? '#1A237E' :
+      d > 200 ? '#1A237E' :
+      d > 100 ? '#1A237E' :
+      d > 50 ? '#1A237E' :
+      d > 20 ? '#1A237E' :
+      d > 10 ? '#1A237E' :
+      '#1A237E';
     },
     makeMap(exploder) {
 
       var kor = area;
-      var width = 1800;
+      var width = 750;
       var height = 1000;
       var that = this;
       var projection = d3.geoMercator()
                                       .center([127.5, 35.9])
-                                      .scale(5000)
-                                      .translate([width / 4, height / 2]);
+                                      .scale(6000)
+                                      .translate([width / 2, height / 2]);
 
       var path = d3.geoPath().projection(projection);
 
       var svg = d3.select("#map").append("svg")
-                                  .attr("width", width)
-                                  .attr("height", height);
+                                  .attr("width", "100%")
+                                  .attr("height", "100%");
 
       var g = svg.append("g");
 
@@ -87,22 +86,41 @@ export default {
                                       })
                                       .attr("d", path)
                                       
-      var exploder = exploder()
-                              .projection(projection)
-                              .size(function (d, i) {
-                                return 300;
-                              })
-                              .position(function (d, i) {
-                                document.getElementById("provName").innerHTML = d.properties.name + '('+d.properties.name_eng+')';
-                                return [800, 200];
-                              })
+    
+      g.selectAll(".place-label")
+        .data(state_features)
+        .enter()
+        .append("text")
+        .attr("class", function(d) {
+          return "place-label";
+          })
+        .attr("transform", function(d) {
+          let posi = path.centroid(d);
+          posi[0] = posi[0]-20;
+          if(d.properties.code == 31){
+            posi[1] = posi[1]+40;
+          }
+          return "translate(" + posi + ")";
+          })
+        .text(function(d) {
+          var s = d.properties.name;
+          if (!s) return;
+          return s;
+        });
 
-        var highlighted_state = null;
+      // var exploder = exploder()
+      //                     .projection(projection)
+      //                     .size(function (d, i) {
+      //                       return 200;
+      //                     })
+      //                     .position(function (d, i) {
+      //                       return "translate(" + path.centroid(d) + ")";
+      //                     })
 
       explode_states.on('click', function () {
                                               d3.selectAll('.highlighted-state')
                                               .transition()
-                                              .duration(500)
+                                              .duration(50)
                                               .attr("d", path)
                                               .attr("transform", "translate(0,0)")
                                               .on('end', function () {
@@ -112,50 +130,14 @@ export default {
                                               d3.select(this)
                                               .classed('highlighted-state', true)
                                               .transition()
-                                              .duration(500)
-                                              .call(exploder);
+                                              .duration(1000)
+                                              // .call(exploder);
       });
     }
   }
 }
 </script>
-<style>
-  @import '~Styles/common.css';
-  #container{
-    background-color: burlywood;
-    width: 100%;
-    max-width: 1600px;
-    margin : auto;
-  }
 
-  #provinces path {
-      stroke : #fff;
-  }
-
-  #explode-provinces path {
-      fill : rgba(0,0,0,0);
-      stroke : rgba(0,0,0,0);
-  }
-
-  #explode-provinces:hover {
-      cursor:pointer;
-  }
-
-  #explode-provinces path.highlighted-state {
-      fill: red;
-  }
-  #map {
-    width: 100%;
-    height: 100%;
-  }
-  #provName {
-    float: right;
-  }
-
-  #provinces text {
-    cursor: pointer;
-    font-size: 12px;
-    font-family: 'Nanum Gothic';
-  }
-
+<style lang="scss">
+  @import '~Styles/geoDashBoard.scss';
 </style>

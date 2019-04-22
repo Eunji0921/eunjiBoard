@@ -1,7 +1,5 @@
 //메인
 import MainRoute from './route/main'
-// d3
-import d3Route from './route/d3'
 
 //에러페이지
 const PageError = () =>
@@ -30,7 +28,6 @@ const routes = [
   }
 ]
 .concat(MainRoute)
-.concat(d3Route)
 .concat({
   name: '404',
   path: root.concat('*'),

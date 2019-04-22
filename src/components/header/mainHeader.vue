@@ -1,7 +1,7 @@
 <template>
   <div class="headerContainer">
     <template v-for="(menu, index) in menuList">
-      <input :id="menu.title" name="radio" type="radio" :key="'menu_radio_' + index">
+      <input :id="menu.title" name="checkbox" type="checkbox" :key="'menu_radio_' + index">
       <router-link
         v-if="menu.type == 'master'"
         class="menu" 
@@ -56,10 +56,15 @@ import Vue from 'vue'
 
 export default {
   name : 'headerBar',
-  components : {
-
+  mounted(){    
+    let target;
+    let fullPath = this.$route.fullPath;
+    if(fullPath.indexOf("geoDashBoard") > -1){
+      target = 'dashBoard';
+    }
+    if(typeof target !== 'undefined') document.getElementById(target).click();
+    this.$router.push({ path: fullPath });
   },
-  props: [],
   data(){
     return{
       menuList : [{
@@ -81,12 +86,6 @@ export default {
                   }
       ]
     }
-  },
-  mounted () {
-    this.$nextTick(()=>{
-    })
-  },
-  watch: {
   },
   methods: {
   }

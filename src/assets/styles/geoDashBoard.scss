@@ -1,0 +1,43 @@
+.mapWrap{
+  width: 100%;
+  max-width: 700px;
+  height: 100%;
+  path{
+    stroke : #fff;
+  }
+}
+
+.place-label{
+  font-size : 11px;
+  fill : #fff;
+}
+
+#explode-provinces{
+  path {
+    fill : rgba(0,0,0,0);
+    stroke : rgba(0,0,0,0);
+    &.highlighted-state{
+      stroke : #fff;
+      stroke-width: 3;
+      fill: #2962FF;
+    }
+  }
+  &:hover{
+    cursor:pointer;
+  }
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+}
+
+#provName {
+  float: right;
+}
+
+#provinces text {
+  cursor: pointer;
+  font-size: 12px;
+  font-family: 'Nanum Gothic';
+}

@@ -48,6 +48,34 @@ ul{padding:0;margin:0;}li{list-style-type:none;}input[type='radio']{display:none
     overflow: hidden;
     background: #2a394f;
     font-weight: bold;
+    input[type='checkbox']{
+      display: none;
+    }
+    input[type='checkbox']:checked + label .headerContainer__content{
+      display: block;
+      top: 68px;
+      border-bottom: 1px solid rgb(33, 46, 65);
+    };
+    input[type="checkbox"]:checked + label > .lil_arrow {
+      -webkit-transition: -webkit-transform 0.8s;
+      transition: transform 0.8s;
+      -webkit-transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      -webkit-transform: rotate(135deg);
+      -ms-transform: rotate(135deg);
+      transform: rotate(135deg);
+      border-top: 2px solid #009688;
+      border-right: 2px solid #009688;
+    };
+    input[type='checkbox']:checked + label .bar{
+      width:0;
+    };
+    input[type='checkbox'][id='dashBoard']:checked + label{
+      height: 325px;
+      @include label-default;
+    }; 
+    input[type='checkbox'][id='dashBoard']:checked + label{
+      @include label-active(4);
+    };
     label{
       padding:25px;
       float:left;
@@ -69,7 +97,7 @@ ul{padding:0;margin:0;}li{list-style-type:none;}input[type='radio']{display:none
       }
       &:hover{
         background: rgb(33, 46, 65);
-        border-bottom: 1px solid #2A394F;
+        border-bottom: 1px solid #00BFA5;
         text-indent:4px;
       }
       &:hover .bar{
@@ -81,7 +109,7 @@ ul{padding:0;margin:0;}li{list-style-type:none;}input[type='radio']{display:none
         height: 2px;
         position: absolute;
         display: block;
-        background: rgb(53, 87, 137);
+        background: rgb(33, 46, 65);
         bottom: 0;
         left: 0;
       }
@@ -110,21 +138,21 @@ ul{padding:0;margin:0;}li{list-style-type:none;}input[type='radio']{display:none
         width:100%;
         opacity:0;
         left:-100%;
-        background: #15a4fa;
+        background: #00695C;
         padding:25px 0px;
         text-indent:25px;
-        box-shadow: 0px 0px #126CA1  inset;
+        box-shadow: 0px 0px #004D40  inset;
         transition:box-shadow .3s,text-indent .3s;
         position:relative;
         cursor: pointer;
 
         &.active{
-          background: #126CA1;
+          background: #009688;
         }
 
         &:hover{
-          background:#0c93e4;
-          box-shadow: 3px 0px #126CA1  inset;
+          background:#009688;
+          box-shadow: 3px 0px #004D40  inset;
           transition:box-shadow .3s linear,text-indent .3s linear;
           text-indent:31px;
 
@@ -136,41 +164,16 @@ ul{padding:0;margin:0;}li{list-style-type:none;}input[type='radio']{display:none
     }
   }
   .contentContainer{
-    background-color: #cdcdcd;
+    background-color: #33333D;
     width: 100%;
-    max-width: 1600px;
+    // max-width: 1600px;
     height: 100%;
-    margin : auto;
+    // margin : auto;
+    div{
+      float: left;
+    }
   }
 
-input[type='radio']:checked + label .headerContainer__content{
-  display: block;
-  top: 68px;
-  border-bottom: 1px solid rgb(33, 46, 65);
-}
-input[type="radio"]:checked + label > .lil_arrow {
-  -webkit-transition: -webkit-transform 0.8s;
-  transition: transform 0.8s;
-  -webkit-transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  -webkit-transform: rotate(135deg);
-  -ms-transform: rotate(135deg);
-  transform: rotate(135deg);
-  border-top: 2px solid rgb(20, 163, 249);
-  border-right: 2px solid rgb(20, 163, 249);
-}
-
-input[type='radio']:checked + label .bar{
-  width:0;
-}
-
-input[type='radio'][id='dashBoard']:checked + label{
-  height: 261px;
-  @include label-default;
-}
-
-input[type='radio'][id='dashBoard']:checked + label{
-  @include label-active(4);
-}
 
 // 애니메이션
 @keyframes in{
