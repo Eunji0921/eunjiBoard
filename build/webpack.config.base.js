@@ -28,7 +28,15 @@ var baseConfig = {
                 exclude: /node_modules\/(?!(dom7|ssr-window|swiper)\/).*/
             },
             {
-                test: /\.(ttf|eot|woff|svg|gif)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+              test: /\.(png|jpg|gif|svg)$/,
+              loader: 'url-loader',
+              options: {
+                limit: 10000,
+                name: '[name].[ext]?[hash:7]'
+              }
+            },
+            {
+                test: /\.(ttf|eot|woff|gif)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
                 loader: 'file-loader',
                 options: {
                     name: 'img/[name].[hash:7].[ext]'

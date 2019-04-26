@@ -1,9 +1,9 @@
 <template>
-  <CanvasWrapper :style="{width: width + 'px', height: height  + 'px'}">
+  <CanvasWrapper :style="{width: propInfo.width + 'px', height: propInfo.height  + 'px'}">
     <Donut :value="value"
-          :width="width"
-          :height="height"
-          :styles="styles"></Donut>
+          :width="propInfo.width"
+          :height="propInfo.height"
+          :styles="propInfo.styles"></Donut>
   </CanvasWrapper>
 </template>
 
@@ -23,18 +23,9 @@ export default {
     value : {
       type : Number,
       default : 0
-    }
-  },
-  data(){
-    return{
-      width : 150,
-      height : 150,
-      styles : {
-        backgorundColor : 'rgba(255,255,255,0)',
-        color : 'rgba(34,150,182,1)',
-        textColor : 'rgba(200,200,200,1)',
-        borderRadius : 0
-      }
+    },
+    propInfo : {
+      type : Object
     }
   }
 }

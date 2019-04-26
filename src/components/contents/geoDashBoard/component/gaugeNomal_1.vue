@@ -1,13 +1,13 @@
 <template>
-  <div class="horizon-bar-center-balloon" style="width:400px; height:100px;">
+  <div class="horizon-bar-center-balloon" :style="{width: width + 'px', height: height  + 'px'}">
     <div ref="barLabel" class="label">
-      <div class="labelBody">
+      <div class="labelBody" :style="{background: backColor}">
         <div ref="barLabelTxt" class="labelTxt">{{value}}%</div>
       </div>
-      <div class="labelArrow"></div>
+      <div class="labelArrow" :style="{background: backColor}"></div>
     </div>
-    <div ref="barContainer" class="barContainer">
-      <div ref="bar" class="bar" :style="{ width : value + '%'}"></div>
+    <div ref="barContainer" class="barContainer" :style="{background: backColor}">
+      <div ref="bar" class="bar" :style="{background : barColor}"></div>
     </div>
   </div>
 </template>
@@ -22,12 +22,20 @@ export default {
     value : {
       type : Number,
       default : 0
+    },
+    backColor : {
+      type : String,
+      default : '#221E5F'
+    },  
+    barColor : {
+      type : String,
+      default : '#7346FF'
     }
   },
   data(){
     return{
-      width : 150,
-      height : 150,
+      width : 200,
+      height : 55,
       styles : {
         backgorundColor : 'rgba(255,255,255,0)',
         color : 'rgba(34,150,182,1)',
@@ -41,19 +49,22 @@ export default {
     }
   },
   mounted(){
-    this.$barContainer = $(this.$refs.barContainer);
-    this.$barLabel = $(this.$refs.barLabel);
-    this.$bar = $(this.$refs.bar);
-    this.$barLabelTxt = $(this.$refs.barLabelTxt);
-
-    this.procLabelAnimate();
-  },
-  watch : {
-    value(newVal, oldVal){
-      this.procLabelAnimate();
-    } 
+    this.$nextTick(()=>{
+        this.initDataSetting();
+    })
   },
   methods: {
+    initDataSetting(){
+      let refKey = this.refKey;
+
+      this.$barContainer = $(this.$refs['barContainer']);
+      this.$barLabel = $(this.$refs['barLabel']);
+      this.$bar = $(this.$refs['bar']);
+      this.$barLabelTxt = $(this.$refs['barLabelTxt']);
+
+      this.procLabelAnimate();
+
+    },
     procLabelAnimate(){
       var result = Math.round(this.value);
 
@@ -62,10 +73,12 @@ export default {
 
       this.$bar.stop().animate({ "width": "0%" }, 0);
       this.$barLabel.stop().animate({ "margin-left": "0%" }, 0);
-      this.$bar.stop().animate({ "width": result + "%" }, 1000);
-      this.$barLabel.stop().animate({ "margin-left": newPer + "%" }, 1000);
-
       this.$barLabelTxt.html(Math.round(newPer) + "%");
+
+      this.$nextTick(()=>{
+        this.$bar.stop().animate({ "width": result + "%" }, 1000);
+        this.$barLabel.stop().animate({ "margin-left": newPer + "%" }, 1000);
+      })
     }
   }
 
@@ -75,26 +88,23 @@ export default {
   .horizon-bar-center-balloon {
       display: flex;
       flex-direction: column;
-      width: 100%;
-      height: 100%;
+      margin-bottom: 20px; 
+      clear: both;
   }
 
   .horizon-bar-center-balloon .barContainer {
       display: flex;
       flex-direction: column;
       width: 100%;
-      background: #FFF;
       border-radius: 30px;
-      min-height: 10px;
+      min-height: 15px;
       height: 20%;
+      padding: 4px;
+      box-sizing: border-box;
   }
 
   .horizon-bar-center-balloon .bar {
-      width: 50%;
       height: 100%;
-      min-height: 10px;
-      height: 100%;
-      background: #0EB795;
       border-radius: 30px;
   }
 
@@ -110,7 +120,6 @@ export default {
   .horizon-bar-center-balloon .labelBody {
       white-space: nowrap;
       /*min-width:120px;*/
-      background: #0EB795;
       border-radius: 6px;
       box-shadow: 2px 2px rgba(0, 0, 0, 0.2);
       text-align: center;
@@ -120,9 +129,10 @@ export default {
 
   .horizon-bar-center-balloon .labelTxt {
       padding: 7px;
-      font-size: 18px;
+      font-size: 12px;
       text-align: center;
       color: #FFF;
+      font-weight: bold;
   }
 
   .horizon-bar-center-balloon .labelArrow {
@@ -130,7 +140,6 @@ export default {
       position: relative;
       width: 10px;
       height: 10px;
-      background: #0EB795;
       transform: rotate(45deg);
       -webkit-transform: rotate(45deg);
       top: -5px;

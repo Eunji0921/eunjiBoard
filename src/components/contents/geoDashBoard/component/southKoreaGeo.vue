@@ -80,12 +80,12 @@ export default {
                                       .attr("id", "explode-provinces")
                                       .selectAll("path")
                                       .data(state_features)
-                                      .enter().append("path")
+                                      .enter()
+                                      .append("path")
                                       .attr('id', function (d) {
                                         return "fips_" + d.properties.code;
                                       })
-                                      .attr("d", path)
-                                      
+                                      .attr("d", path);
     
       g.selectAll(".place-label")
         .data(state_features)

@@ -1,22 +1,22 @@
 <template>
   <CanvasWrapper :style="{width: propInfo.width + 'px', height: propInfo.height  + 'px'}">
-    <Gauge :value="value"
+    <Person :value="value"
           :width="propInfo.width"
           :height="propInfo.height"
-          :styles="propInfo.styles"></Gauge>
+          :styles="propInfo.styles"></Person>
   </CanvasWrapper>
 </template>
 
 <script>
 import Vue from 'vue'
 import CanvasWrapper from 'Component/canvas/canvasWrapper.vue';
-import Gauge from 'Component/canvas/component/gauge_1.vue';
+import Person from 'Component/canvas/component/person_1.vue';
 
 export default {
-  name : 'gaugeCanvasComponent_2',
+  name : 'gaugeCanvasComponent_3',
   components: {
     CanvasWrapper,
-    Gauge
+    Person
   },
   props: {
     value : {
